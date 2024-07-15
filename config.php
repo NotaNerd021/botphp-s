@@ -456,7 +456,7 @@ function checkSpam(){
             $spamInfo['count'] = 1;
             $spamInfo['date'] = strtotime("+1 minute");
         }
-        if($spamInfo['count'] >= 50){
+        if($spamInfo['count'] >= 200){
             $spamInfo['banned'] = strtotime("+1 day");
         }
         $spamInfo = json_encode($spamInfo);
