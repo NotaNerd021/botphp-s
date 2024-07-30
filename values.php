@@ -144,7 +144,7 @@ SUB-LINK
     'insert_discount_code'=>"• کد تخفیف را وارد  کنید:",
     "not_valid_discount_code"=>"  کد تخفیفی که وارد کردید معتبر نیست",
     'valid_discount_code'=>"  کد تخفیف با موفقیت استفاده شد
-مقدار تخفیف AMOUNT تومان",
+مقدار تخفیف AMOUNT ",
 'used_discount_code'=>"☑️• کد تخفیف استفاده شد
 
  آیدی کاربر: USERID
