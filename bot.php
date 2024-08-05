@@ -1290,7 +1290,7 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
             break;
     	}
     	if(!$response->success){
-            sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             break;
         }
@@ -1721,7 +1721,7 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
         	exit;
         }
         if(!$response->success){
-            sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             exit;
         }
@@ -2957,7 +2957,7 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -3367,7 +3367,7 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $buttonValues['cance
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -3690,7 +3690,7 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
         		exit;
         	}
         	if(!$response->success){
-                sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -4221,7 +4221,7 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $buttonValues['cancel']
         		exit;
         	}
         	if(!$response->success){
-                sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -5684,7 +5684,7 @@ if(preg_match('/freeTrial(\d+)_(?<buyType>\w+)/',$data,$match)) {
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
