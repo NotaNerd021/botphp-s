@@ -1,7 +1,9 @@
 <?php
 include_once 'config.php';
 check();
+
 $robotState = $botState['botState']??"on";
+
 if ($userInfo['step'] == "banned" && $from_id != $admin && $userInfo['isAdmin'] != true) {
     sendMessage($mainValues['banned']);
     exit();
@@ -732,7 +734,7 @@ if(preg_match('/^tranfserUserAmount(\d+)/',$userInfo['step'],$match) && $text !=
 }
 if($data=="increaseMyWallet"){
     delMessage();
-    sendMessage("مقدار شارژ مورد نظر خود را به تومان وارد کنید (بیشتر از 50000 تومان)",$cancelKey);
+    sendMessage(""مقدار شارژ مورد نظر خود را به تومان وارد کنید (بیشتر از 50000 تومان)"",$cancelKey);
     setUser($data);
 }
 if($userInfo['step'] == "increaseMyWallet" && $text != $buttonValues['cancel']){
@@ -740,7 +742,7 @@ if($userInfo['step'] == "increaseMyWallet" && $text != $buttonValues['cancel']){
         sendMessage($mainValues['send_only_number']);
         exit();
     }
-    elseif($text < 5000){
+    elseif($text < 50000){
         sendMessage("لطفا مقداری بیشتر از 50000 وارد کن");
         exit();
     }
@@ -1290,7 +1292,7 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
             break;
     	}
     	if(!$response->success){
-            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             break;
         }
@@ -1721,7 +1723,7 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
         	exit;
         }
         if(!$response->success){
-            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+            sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             exit;
         }
@@ -1750,7 +1752,6 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
 💝 config : <code>$link</code>":"");
 
 if($botState['subLinkState'] == "on") $acc_text .= "
-
 
 
 🌐 subscription : <code>$subLink</code>
@@ -2806,7 +2807,7 @@ if((preg_match('/^discountSelectPlan(\d+)_(\d+)_(\d+)/',$userInfo['step'],$match
         if($botState['walletState'] == "on") $keyboard[] = [['text' => $buttonValues['pay_with_wallet'],  'callback_data' => "payWithWallet$hash_id"]];
         if($botState['tronWallet'] == "on") $keyboard[] = [['text' => $buttonValues['tron_gateway'],  'callback_data' => "payWithTronWallet" . $hash_id]];
         
-        if(!preg_match('/^discountSelectPlan/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 اعمال کد تخفیف  ",  'callback_data' => "haveDiscountSelectPlan_" . $match[1] . "_" . $match[2] . "_" . $rowId]];
+        if(!preg_match('/^discountSelectPlan/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 اعمال کد تخفیف ",  'callback_data' => "haveDiscountSelectPlan_" . $match[1] . "_" . $match[2] . "_" . $rowId]];
 
     }
 	$keyboard[] = [['text' => $buttonValues['back_to_main'], 'callback_data' => "selectCategory{$call_id}_{$sid}_{$match['buyType']}"]];
@@ -2994,7 +2995,6 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
 💝 config : <code>$link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
-
 
 
 🌐 subscription : <code>$subLink</code>"; 
@@ -3367,7 +3367,7 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $buttonValues['cance
 		exit;
 	}
 	if(!$response->success){
-        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -3620,9 +3620,8 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
         include 'phpqrcode/qrlib.php';
         $msg = $message_id;
 
-        $agent_bought = false;
+        $agent_bought = $payInfo['agent_bought'];
 	    $eachPrice = $price / $accountCount;
-        if($userInfo['is_agent'] == true && ($match['buyType'] == "one" || $match['buyType'] == "much")) {$agent_bought = true; setUser('', 'temp');}
 
         alert($mainValues['sending_config_to_user']);
         define('IMAGE_WIDTH',540);
@@ -3690,7 +3689,7 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
         		exit;
         	}
         	if(!$response->success){
-                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -4221,7 +4220,7 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $buttonValues['cancel']
         		exit;
         	}
         	if(!$response->success){
-                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+                sendMessage(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -5684,7 +5683,7 @@ if(preg_match('/freeTrial(\d+)_(?<buyType>\w+)/',$data,$match)) {
 		exit;
 	}
 	if(!$response->success){
-        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنید');
+        alert(' متاسفانه خطایی رخ داده است ، لطفا به آی دی پشتیبانی پیغام دهید یا تیکت جدید ثبت کنی');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -7731,7 +7730,7 @@ if(preg_match('/^discountRenew(\d+)_(\d+)/',$userInfo['step'], $match) || preg_m
     if($botState['walletState'] == "on") $keyboard[] = [['text' => "پرداخت با موجودی مبلغ $price",  'callback_data' => "payRenewWithWallet$hash_id"]];
     if($botState['tronWallet'] == "on") $keyboard[] = [['text' => $buttonValues['tron_gateway'],  'callback_data' => "payWithTronWallet" . $hash_id]];
 
-    if(!preg_match('/^discountRenew/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 اعمال کد تخفیف  ",  'callback_data' => "haveDiscountRenew_" . $match[1] . "_" . $rowId]];
+    if(!preg_match('/^discountRenew/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 اعمال کد تخفیف ",  'callback_data' => "haveDiscountRenew_" . $match[1] . "_" . $rowId]];
 
     $keyboard[] = [['text'=>$buttonValues['cancel'], 'callback_data'=> "mainMenu"]];
 
@@ -8542,7 +8541,7 @@ if(preg_match('/increaseADay(.*)/', $data, $match)){
     while ($cat = $res->fetch_assoc()){
         $id = $cat['id'];
         $title = $cat['volume'];
-        $price = number_format($cat['price']);
+        $price = $cat['price'];
         if($agentBought == true){
             $discounts = json_decode($userInfo['discount_percent'],true);
             if($botState['agencyPlanDiscount']=="on") $discount = $discounts['plans'][$orderInfo['fileid']]?? $discounts['normal'];
@@ -8550,7 +8549,7 @@ if(preg_match('/increaseADay(.*)/', $data, $match)){
             $price -= floor($price * $discount / 100);
         }
         if($price == 0) $price = "رایگان";
-        else $price .= " تومان";
+        else $price = number_format($price) . " تومان";
         $keyboard[] = ['text' => "$title روز $price", 'callback_data' => "selectPlanDayIncrease{$match[1]}_$id"];
     }
     $keyboard = array_chunk($keyboard,2);
@@ -8896,7 +8895,7 @@ if(preg_match('/^increaseAVolume(.*)/', $data, $match)){
     while($cat = $res->fetch_assoc()){
         $id = $cat['id'];
         $title = $cat['volume'];
-        $price = number_format($cat['price']);
+        $price = $cat['price'];
         if($agentBought == true){
             $discounts = json_decode($userInfo['discount_percent'],true);
             if($botState['agencyPlanDiscount']=="on") $discount = $discounts['plans'][$orderInfo['fileid']]?? $discounts['normal'];
@@ -8904,7 +8903,7 @@ if(preg_match('/^increaseAVolume(.*)/', $data, $match)){
             $price -= floor($price * $discount / 100);
         }
         if($price == 0) $price = "رایگان";
-        else $price .=  ' تومان';
+        else $price = number_format($price) .  ' تومان';
         
         $keyboard[] = ['text' => "$title گیگ $price", 'callback_data' => "increaseVolumePlan{$match[1]}_{$id}"];
     }
@@ -10113,7 +10112,7 @@ if($data == 'reciveApplications') {
     }
     $keyboard[] = ['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"];
     $keyboard = array_chunk($keyboard,1); 
-    editText($message_id, "
+    editText($message_id, "    
 🔸می توانید به راحتی همه فایل ها را (به صورت رایگان) دریافت کنید
 📌 برای دریافت آخرین لینک های دانلود لطفا از صفحه سابسکریپشن استفاده کنید
 
